@@ -7,7 +7,7 @@ import java.util.Set;
 public class QuestionSingleChoice extends QuestionBase{
 	private Scanner scnr = new Scanner(System.in);
 	private Set<String> answersList = new HashSet<String>();
-	QuestionSingleChoice() {
+	public QuestionSingleChoice() {
 		super();
 		setAnswers();
 	}
@@ -18,7 +18,7 @@ public class QuestionSingleChoice extends QuestionBase{
 		do {
 			System.out.println("Please select an answer. Type \"-1\" to confirm answers.");
 			viewQuestion();
-			viewChoices(answersList);
+			viewAnswerList(answersList);
 			userInput = scnr.next();
 			if(!userInput.equals("-1")) {
 				answersList.clear();
@@ -28,5 +28,10 @@ public class QuestionSingleChoice extends QuestionBase{
 		
 		if(answersList.isEmpty()) //Forces the user to input at least one answer.
 			setAnswers();
+	}
+	
+	@Override
+	public Set<String> getAnswers() {
+		return answersList;
 	}
 }
