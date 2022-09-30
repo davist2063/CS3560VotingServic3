@@ -10,7 +10,7 @@ public class StudentList {
 	private int studentId;
 	private int numStudents;
 	
-	//Might give users the option to input the number of students.
+	//Creates a student list with a random number of students.
 	StudentList() {
 		this(0);
 	}
@@ -18,8 +18,10 @@ public class StudentList {
 	//Might give users the option to input the number of students.
 	StudentList(int numStudents) {
 		if(numStudents == 0) {
-			this.numStudents = newNum.nextInt(10,150);
+			this.numStudents = newNum.nextInt(5,15);
 		}
+		else
+			this.numStudents = numStudents;
 		addStudents();
 	}
 	
@@ -30,6 +32,24 @@ public class StudentList {
 			Student newStudent = new Student(studentId);
 			studentList.put(studentId, newStudent);
 		}
+		return;
+	}
+	
+	//Makes the question live and allows students to start voting.
+	public void startPolling(QuestionBase question) {
+		System.out.println("\n\nQuestion is Now Live:");
+		for(Student values : studentList.values()) { //Iterates through all of the students.
+			values.selectAnswer(question);
+		}
+	}
+	
+	//Prints the student list.
+	public void viewStudentList() {
+		System.out.println("Total Students Participating: " + studentList.size());
+		for(Student values : studentList.values()) {
+			System.out.println("ID: " + values.getId());
+		}
+		System.out.println("");
 		return;
 	}
 }
